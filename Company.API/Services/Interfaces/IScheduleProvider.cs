@@ -2,5 +2,5 @@
 
 public interface IScheduleProvider
 {
-    bool TryGetNotificationIntervals(string type, string market, out List<int> intervals);
+    bool TryGetNotificationIntervals(string type, string market, out List<int>? intervals);
 }

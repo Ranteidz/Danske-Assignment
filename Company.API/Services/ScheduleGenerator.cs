@@ -14,8 +14,8 @@ public class ScheduleGenerator : IScheduleGenerator
 
     public List<NotificationDto> CreateSchedule(CompanyDto company)
     {
-        if (_scheduleProvider.TryGetNotificationIntervals(company.Type, company.Market, out var intervals))
-            return GenerateNotifications(intervals);
+        if (_scheduleProvider.TryGetNotificationIntervals(company.Type!, company.Market!, out var intervals))
+            return GenerateNotifications(intervals!);
         return new List<NotificationDto>();
     }
 
