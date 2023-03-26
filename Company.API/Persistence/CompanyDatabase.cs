@@ -5,14 +5,6 @@ namespace Company.API.Persistence;
 
 public class CompanyDatabase : DbContext
 {
-    public CompanyDatabase(DbContextOptions<CompanyDatabase> options) : base(options)
-    {
-    }
-
-    public CompanyDatabase()
-    {
-    }
-
     public DbSet<CompanyDto> Companies { get; set; } = null!;
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

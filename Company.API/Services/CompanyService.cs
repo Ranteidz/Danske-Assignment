@@ -18,6 +18,12 @@ public class CompanyService : ICompanyService
         _scheduleGenerator = scheduleGenerator;
     }
 
+    /// <summary>
+    ///     Takes in an CompanyDto, generates a schedule if requirements are met and saves the object in the database.
+    /// </summary>
+    /// <param name="companyDto"></param>
+    /// <returns></returns>
+    /// <exception cref="DatabaseConstraintViolationException"></exception>
     public async Task<CompanyDto> CreateCompanyAsync(CompanyDto companyDto)
     {
         try
@@ -33,12 +39,22 @@ public class CompanyService : ICompanyService
         }
     }
 
+    /// <summary>
+    ///     Gets all companies from the database.
+    /// </summary>
+    /// <returns></returns>
     public async Task<List<CompanyDto>> GetCompaniesAsync()
     {
         var companies = await _db.Companies.Include(x => x.Notifications.OrderBy(e => e.DateTime)).ToListAsync();
         return companies;
     }
 
+    /// <summary>
+    ///     Gets a company by companyId, includes the notifications lists and also orders the list by date.
+    /// </summary>
+    /// <param name="companyId"></param>
+    /// <returns></returns>
+    /// <exception cref="ItemNotFoundException"></exception>
     public async Task<CompanyDto> GetCompanyByIdAsync(string companyId)
     {
         var company = await _db.Companies

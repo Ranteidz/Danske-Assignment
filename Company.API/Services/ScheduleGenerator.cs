@@ -12,6 +12,13 @@ public class ScheduleGenerator : IScheduleGenerator
         _scheduleProvider = scheduleProvider;
     }
 
+    /// <summary>
+    ///     Checks if the company provided meets the notification requirements, generates notifications and returns a
+    ///     notifications list.
+    ///     If the company doesn't meet the requirements, an empty notification list will be returned.
+    /// </summary>
+    /// <param name="company"></param>
+    /// <returns></returns>
     public List<NotificationDto> CreateSchedule(CompanyDto company)
     {
         if (_scheduleProvider.TryGetNotificationIntervals(company.Type!, company.Market!, out var intervals))
@@ -19,6 +26,11 @@ public class ScheduleGenerator : IScheduleGenerator
         return new List<NotificationDto>();
     }
 
+    /// <summary>
+    ///     Converts a list of integer intervals to notifications.
+    /// </summary>
+    /// <param name="intervals"></param>
+    /// <returns></returns>
     private static List<NotificationDto> GenerateNotifications(List<int> intervals)
     {
         var notifications = new List<NotificationDto>();

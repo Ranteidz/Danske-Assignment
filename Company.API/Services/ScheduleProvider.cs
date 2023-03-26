@@ -5,7 +5,7 @@ namespace Company.API.Services;
 public class ScheduleProvider : IScheduleProvider
 {
     //Ideally this should be stored in the database because you could change the schedule without recompiling the application
-    public readonly IDictionary<(string companyType, string market), List<int>?> NotificationsMap =
+    private readonly IDictionary<(string companyType, string market), List<int>?> _notificationsMap =
         new Dictionary<(string companyType, string market), List<int>?>
         {
             {("small", "Denmark"), new List<int> {1, 5, 10, 15, 20}},
@@ -22,9 +22,15 @@ public class ScheduleProvider : IScheduleProvider
             {("large", "Finland"), new List<int> {1, 5, 10, 15, 20}}
         };
 
-
+    /// <summary>
+    ///     Tries to retrieve intervals.
+    /// </summary>
+    /// <param name="type"></param>
+    /// <param name="market"></param>
+    /// <param name="intervals"></param>
+    /// <returns></returns>
     public bool TryGetNotificationIntervals(string type, string market, out List<int>? intervals)
     {
-        return NotificationsMap.TryGetValue((type, market), out intervals);
+        return _notificationsMap.TryGetValue((type, market), out intervals);
     }
 }

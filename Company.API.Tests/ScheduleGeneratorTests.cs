@@ -12,8 +12,8 @@ namespace Company.API.Tests;
 
 public class ScheduleGeneratorTests
 {
-    private readonly IScheduleGenerator _scheduleGenerator;
     private readonly Mock<IScheduleProvider> _mockProvider;
+    private readonly IScheduleGenerator _scheduleGenerator;
 
     public ScheduleGeneratorTests()
     {
